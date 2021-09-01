@@ -8,11 +8,10 @@ import br.ortega.businesscard.App
 import br.ortega.businesscard.R
 import br.ortega.businesscard.data.BusinessCard
 import br.ortega.businesscard.databinding.ActivityAddBusinessCardBinding
+import top.defaults.colorpicker.ColorPickerPopup
 
 class AddBusinessCardActivity : AppCompatActivity() {
-
     private val binding by lazy { ActivityAddBusinessCardBinding.inflate(layoutInflater) }
-
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModelFactory((application as App).repository)
     }
@@ -36,7 +35,34 @@ class AddBusinessCardActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.label_show_success, Toast.LENGTH_SHORT).show()
             finish()
         }
-
+        binding.btnColor.setOnClickListener {
+            ColorPickerPopup.Builder(this@AddBusinessCardActivity)
+                .enableBrightness(
+                    true
+                )
+                .enableAlpha(
+                    true
+                )
+                .okTitle(
+                    "Choose"
+                )
+                .cancelTitle(
+                    "Cancel"
+                )
+                .showIndicator(
+                    true
+                )
+                .showValue(
+                    true
+                )
+                .build()
+                .show(it,
+                    object : ColorPickerPopup.ColorPickerObserver() {
+                        override fun onColorPicked(color: Int) {
+                            binding.tilCor.editText?.setText("#%X".format(color))
+                        }
+                    })
+        }
         binding.btnClose.setOnClickListener {
             finish()
         }

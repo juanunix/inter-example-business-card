@@ -118,6 +118,13 @@
             android:inputType="text"
             android:textAllCaps="true"
             />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="seleccione color"
+            />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
